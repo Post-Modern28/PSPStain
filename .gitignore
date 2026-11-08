@@ -1,0 +1,25 @@
+
+# Игнорируем тяжелые чекпоинты и логи
+checkpoints/
+logs/
+
+# Игнорируем результаты генерации и сравнения изображений
+results/
+image_comparison/
+image_comparison_zhores.zip
+index.html
+
+# Игнорируем кэш Python и среды разработки
+**/__pycache__/
+**/.ipynb_checkpoints/
+
+checkpoints/
+logs/
+
+results/
+image_comparison/
+image_comparison_zhores.zip
+index.html
+
+**/__pycache__/
+**/.ipynb_checkpoints/

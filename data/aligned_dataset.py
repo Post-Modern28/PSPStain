@@ -5,7 +5,7 @@ import torch
 import json
 import torchvision.transforms as transforms
 from data.base_dataset import BaseDataset, get_transform
-from data.image_folder import make_dataset
+from data.image_folder import make_dataset, IMG_EXTENSIONS
 from PIL import Image
 import random
 import util.util as util
@@ -38,12 +38,17 @@ class AlignedDataset(BaseDataset):
             self.dir_B = os.path.join(opt.dataroot, "valB")
            
 
-        self.A_paths = sorted(make_dataset(self.dir_A, opt.max_dataset_size))   # load images from '/path/to/data/trainA'
-        self.B_paths = sorted(make_dataset(self.dir_B, opt.max_dataset_size))    # load images from '/path/to/data/trainB'
+        #self.A_paths = sorted(make_dataset(self.dir_A, opt.max_dataset_size))   # load images from '/path/to/data/trainA'
+        #self.B_paths = sorted(make_dataset(self.dir_B, opt.max_dataset_size))    # load images from '/path/to/data/trainB'
+        self.A_paths = sorted([p for p in make_dataset(self.dir_A, opt.max_dataset_size) if os.path.splitext(p)[1].lower() in IMG_EXTENSIONS])
+        self.B_paths = sorted([p for p in make_dataset(self.dir_B, opt.max_dataset_size) if os.path.splitext(p)[1].lower() in IMG_EXTENSIONS])
 
 
         self.A_size = len(self.A_paths)  # get the size of dataset A
         self.B_size = len(self.B_paths)  # get the size of dataset B
+        print('Sizes of datasets:')
+        print(self.A_size, self.B_size)
+        # print(set(self.A_paths) - set(self.B_paths))
         assert self.A_size == self.B_size
 
     def __getitem__(self, index):

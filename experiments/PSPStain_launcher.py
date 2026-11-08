@@ -6,9 +6,12 @@ class Launcher(TmuxLauncher):
         return [
             # Command 0
             Options(
-                dataroot="",
-                
-                name="train",
+                # dataroot="~/benchmarking/datasets/MIST_HER2_filtered_25",
+                # name="train_mist_filtered",
+                # dataroot="~/benchmarking/datasets/MIST_HER2_retccl_25",
+                # name="retccl_25",
+                dataroot="~/benchmarking/datasets/MIST_HER2_RANDOM_30",
+                name="random_30",
                 checkpoints_dir='checkpoints',
                 model='PSPStain',
                 CUT_mode="FastCUT",
@@ -30,7 +33,7 @@ class Launcher(TmuxLauncher):
                 nce_layers='0,4,8,12,16',
                 nce_T=0.07,
                 num_patches=256,
-                unet_seg='BCI_unet_seg',
+                unet_seg='MIST_unet_seg',
 
                 # FDL:
                 lambda_gp=10.0,
