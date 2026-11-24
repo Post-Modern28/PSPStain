@@ -6,9 +6,24 @@ from models import create_model
 from util.visualizer import Visualizer
 # from torch.utils.tensorboard import SummaryWriter
 import os   
+import random
+import numpy as np
+
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()   # get training options
+    
+    # New block for seeds
+    seed = opt.seed
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    torch.use_deterministic_algorithms(True, warn_only=True)
+
+    
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
     dataset_size = len(dataset)    # get the number of images in the dataset.
     opt.train_dataset_size = dataset_size

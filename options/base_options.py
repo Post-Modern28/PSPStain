@@ -79,6 +79,9 @@ class BaseOptions():
         # FDL:
         parser.add_argument('--weight_norm', type=str, default='none', choices=['none', 'spectral'], help='chooses which weight norm layer to use.')
 
+        parser.add_argument("--seed", type=int, default=0,  help='fix random seed for initialization.')
+
+
         self.initialized = True
         return parser
 
